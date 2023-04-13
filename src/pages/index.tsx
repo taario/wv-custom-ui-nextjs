@@ -42,8 +42,16 @@ export default function Home() {
 
       instance.addEventListener("documentLoaded", () => {
         console.log("document loaded");
-        //documentViewer.setToolMode(documentViewer.getTool(Core.Tools.ToolNames.EDIT));
+        instance.setToolMode(instance.getTool((window as any).Core.Tools.ToolNames.EDIT));
         setAnnotationManager(instance.getAnnotationManager());
+      });
+
+      instance.addEventListener("textSelected", (quads: any, selectedText: any, pageNumber: any) => {
+        // quads will be an array of 'Quad' objects
+        // text is the selected text as a string
+        if (selectedText.length > 0) {
+          console.log(selectedText);
+        }
       });
     })();
   }, []);
